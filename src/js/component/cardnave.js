@@ -1,8 +1,10 @@
 import React from "react";
-import { rigoImage } from "../../img/rigo-baby.jpg";
+import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css"
+import { Link } from "react-router-dom";
 
 export const Cardnave = (props) => {
+
 	return (
 
 		<div className="card" style={{ width: "18rem" }}>
@@ -10,7 +12,7 @@ export const Cardnave = (props) => {
 			<div className="card-body">
 				<h5 className="card-title">{props.name}</h5>
 				<p className="card-text">info.</p>
-				<button href="#" className="btn btn-primary">Ver nave</button>
+				{/* <Link to={"/nave/" + props.uid} className="btn btn-primary">Ver{props.uid}</Link> */}
 			</div>
 		</div>
 	);

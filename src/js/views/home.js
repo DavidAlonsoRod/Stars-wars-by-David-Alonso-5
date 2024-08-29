@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { rigoImage } from "../../img/rigo-baby.jpg"
 import "../../styles/home.css";
 import { Cardnave } from "../component/cardnave";
+import { Context } from "../store/appContext"
 
 export const Home = () => {
 
-	const [naves, setNaves] = useState([])
-	useEffect(() => {
-		console.log('aqui')
-		fetch('https://www.swapi.tech/api/starships')
-			.then((response) => response.json())
-			// .then((data) => console.log(data.results))
-			.then((data) => setNaves(data.results))
+	const { store, actions } = useContext(Context);
 
-	}, [])
 
 
 	return (
@@ -21,11 +15,19 @@ export const Home = () => {
 		<div className="text-center mt-5">
 
 
-			<Cardnave name="falcon" />
-			<Cardnave name="edwin" />
-			<Cardnave name="mustafa" />
 
-		</div>
+			<h1 className="text-danger justify-content-start">Naves</h1>
+			<div className="container">
+				<div className="d-flex align-content-around flex-wrap mb-3">
+					{store.navesflux.map((nave) => <Cardnave key={nave.uid} uid={nave.uid} name={nave.name} />)}
+				</div>
+
+			</div>
+
+
+		</div >
+
+
 
 
 	);
