@@ -1,30 +1,9 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			// demo: [
-			// 	{
-			// 		title: "FIRST",
-			// 		background: "white",
-			// 		initial: "white"
-			// 	},
-			// 	{
-			// 		title: "SECOND",
-			// 		background: "white",
-			// 		initial: "white"
-			// 	}
-			// ],
-			navesflux: [
-				{
-					uid: "",
-					name: "",
-					initial: ""
-				},
-				{
-					uid: "",
-					name: "",
-					initial: ""
-				}
-			]
+
+			navesflux: [],
+			charactersflux: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -40,6 +19,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then((response) => response.json())
 					// .then((data) => console.log(data.results))
 					.then((data) => setStore({ navesflux: data.results }))
+
+				fetch('https://www.swapi.tech/api/people')
+					.then((response) => response.json())
+					// .then((data) => console.log(data.results))
+					.then((data) => setStore({ charactersflux: data.results }))
 
 
 			},
