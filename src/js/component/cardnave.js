@@ -12,7 +12,8 @@ export const Cardnave = (props) => {
 			<div className="card-body">
 				<h5 className="card-title">{props.name}</h5>
 				<p className="card-text">info.</p>
-				<Link to={"/nave/" + props.uid} className="btn btn-primary">Ver{props.uid}</Link>
+				<Link to={"/nave/" + props.name} className="btn btn-primary">Ver: {props.name}</Link>
+
 			</div>
 		</div>
 	);

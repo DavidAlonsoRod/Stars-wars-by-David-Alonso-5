@@ -8,14 +8,14 @@ export const Nave = props => {
     const [starship, setStarship] = useState({});
     const params = useParams();
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        fetch('https://www.swapi.tech/api/starships/' + params.nave_id)
-            .then((response) => response.json())
-            // .then((data) => console.log(data.results))
-            .then((data) => setStarship(data.result.properties))
+    //     fetch('https://www.swapi.tech/api/starships/' + params.nave_id)
+    //         .then((response) => response.json())
+    //         // .then((data) => console.log(data.results))
+    //         .then((data) => setStarship(data.result.properties))
 
-    }, [])
+    // }, [])
 
 
 
@@ -27,6 +27,7 @@ export const Nave = props => {
             <hr className="my-4" />
             <p>Name: {starship.name}</p>
 
+
             <p>Model: {starship.model}</p>
             <p> Manufacturer: {starship.manufacturer}</p>
             <Link to="/">
@@ -34,6 +35,7 @@ export const Nave = props => {
                     Back home
                 </span>
             </Link>
+            
         </div>
     );
 };
