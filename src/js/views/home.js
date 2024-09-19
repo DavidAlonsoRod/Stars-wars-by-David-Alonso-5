@@ -14,7 +14,7 @@ export const Home = () => {
 
 
 	useEffect(() => {
-		actions.loadCharacters();
+		actions.functionCharacters();
 		actions.loadStarships();
 
 	}, []);
@@ -24,25 +24,23 @@ export const Home = () => {
 	return (
 		<>
 
-			<div className="characters d-inline-flex mb-5">
-				{store.charactersflux.map((character, index) => (
-					<div key={index}>
-						<Cardcharacter
-
-							uid={character.uid} name={character.properties.name} eye_color={character.properties.eye_color}
-							hair_color={character.properties.hair_color} gender={character.properties.gender}
-						/>
+			<div className="text-center ">
+				<div className="container ">
+					<h1 className="text-danger text-start">Personajes</h1>
+					<div className="d-flex align-content-around gap-4" style={{ display: "flex", overflowX: "auto", whiteSpace: "nowrap", paddingBottom: "50px" }}>
+						{store.charactersflux.map((character, index) => <div display="inline-block"><Cardcharacter key={index} uid={character.uid} name={character.name} /></div>)}
 					</div>
-				))}
-			</div>
+				</div>
+			</div >
 			<div className="text-center ">
 				<div className="container ">
 					<h1 className="text-danger text-start">Naves</h1>
 					<div className="d-flex align-content-around gap-4" style={{ display: "flex", overflowX: "auto", whiteSpace: "nowrap", paddingBottom: "50px" }}>
-						{store.navesflux.map((nave) => <div display="inline-block"><Cardnave key={nave.uid} uid={nave.uid} name={nave.name} /></div>)}
+						{store.navesflux.map((nave, index) => <div display="inline-block"><Cardnave key={nave.uid} uid={nave.uid} name={nave.name} /></div>)}
 					</div>
 				</div>
 			</div >
+
 
 		</>
 
