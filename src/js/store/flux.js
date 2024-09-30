@@ -2,25 +2,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 
-			navesflux: [],
+			
 			charactersflux: [{}],
-			message: 'inicia',
-			planetsflux: []
+			message: 'Mensaje inicial',
+			planetsflux: [],
+			misCharacters: [],
+			vehiclesflux:[]
 
 		},
 		actions: {
 
-			loadStarships: async () => {
-
-
-				fetch('https://www.swapi.tech/api/starships')
-					.then((response) => response.json())
-					.then((data) => setStore({ navesflux: data.results }))
-
+			changeMessage: (name) => {
+				const store = getStore();
+				if (store.misCharacters.includes(name)) {
+					const new_list = store.misCharacters.filter((character) => character != name)
+					console.log(new_list)
+					setStore({ misCharacters: new_list });
+				} else {
+					console.log('no está')
+					setStore({ misCharacters: [...store.misCharacters, name] });
+				}
 			},
 
 
-			functionCharacters: () => {
+			loadCharacters: () => {
 
 				const store = getStore();
 
@@ -31,31 +36,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then((response) => response.json())
 					.then((data) => setStore({ charactersflux: data.results }))
 
+			},
 
+			loadPlanets: () => {
+
+				const store = getStore();
+
+				setStore({ planetsflux: [] })
+
+
+				fetch('https://www.swapi.tech/api/planets')
+					.then((response) => response.json())
+					.then((data) => setStore({ planetsflux: data.results }))
 
 			},
 
+			loadVehicles: () => {
+
+				const store = getStore();
+
+				setStore({ vehiclesflux: [] })
 
 
-			// loadCharacters: async () => {
-			// 	try {
-			// 		const response = await fetch('https://www.swapi.tech/api/people/');
-			// 		const data = await response.json();
-			// 		const results = data.results;
+				fetch('https://www.swapi.tech/api/vehicles')
+					.then((response) => response.json())
+					.then((data) => setStore({ vehiclesflux: data.results }))
 
-			// 		const charactersflux = [];
-			// 		for (const result of results) {
-			// 			const characterId = result.uid;
-			// 			const characterResponse = await fetch(`https://www.swapi.tech/api/people/${characterId}`);
-			// 			const characterData = await characterResponse.json();
-			// 			charactersflux.push(characterData.result);
-			// 		}
-			// 		setStore({ charactersflux });
-
-			// 	} catch (error) {
-			// 		console.error("Error fetching characters:", error);
-			// 	}
-			// },
+			},
+			
+			removeFavorite: (name) => {
+				const store = getStore();
+				const new_list = store.misCharacters.filter((character) => character !== name);
+				setStore({ misCharacters: new_list });
+			}
 
 		}
 	};

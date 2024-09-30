@@ -1,0 +1,48 @@
+@import url('bootstrap-icons/font/bootstrap-icons.css');
+
+.dropdown-menu {
+    left: auto; /* Cambia de 'left: 0' */
+    right: 0; /* Coloca el dropdown bien a la derecha del botón */
+    z-index: 1000; /* Asegúrate que esté por encima de otros elementos */
+}
+
+.navbar {
+    background-color: black !important; /* Usar '!important' solo si es necesario */
+}
+
+.navbar .navbar-brand, .navbar .nav-link {
+    color: white; /* Cambia el color del texto a blanco */
+}
+
+.navbar a {
+    text-decoration: none; /* Eliminar subrayado */
+    color: white; /* Cambiar el color del enlace a blanco (ajusta como necesites) */
+}
+
+.navbar a:hover {
+    text-decoration: underline; /* Si deseas agregar subrayado al pasar el mouse sobre el enlace */
+    color: #ccc; /* Cambiar el color del enlace al pasar el mouse (ajusta como necesites) */
+}
+
+.btn {
+    color: whitesmoke;
+}
+
+.btn:hover {
+    color: rgb(139, 136, 136);
+}
+
+.dropdown-menu {
+    background-color: #343a40; /* Color de fondo oscuro */
+    color: white; /* Cambia el color del texto si es necesario */
+}
+
+.dropdown-item {
+    color: rgb(255, 255, 255) !important; /* Asegúrate de que el texto sea blanco */
+}
+
+/* Aplica el hover sobre el dropdown-item */
+.dropdown-item:hover {
+    background-color: #495057; /* Color de fondo al pasar el ratón */
+    color: rgb(195, 23, 23); /* Color del texto al pasar el ratón */
+}

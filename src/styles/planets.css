@@ -35,14 +35,3 @@ p {
     color:gray
     
 }
-/* Para navegadores WebKit como Chrome y Safari */
-::-webkit-scrollbar {
-    width: 6px; 
-    height: 6px
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: rgba(158, 158, 158, 0.8); /* Color de la parte del "thumb" (la parte que arrastras) */
-    border-radius: 1px; /* Bordes redondeados */
-}
-

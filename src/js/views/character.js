@@ -1,55 +1,79 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-function obtenerIdDeUrl(url) {
-    // Divide la URL en partes separadas por "/"
-    const partesUrl = url.split('/');
-    // El último elemento no vacío de la lista será el ID
-    const idNumero = partesUrl.filter(Boolean).pop();
-    return idNumero;
-}
-
-export const Character = props => {
+export const Character = () => {
     const { store, actions } = useContext(Context);
-    const [Data_Character, setData_Character] = useState({});
-    const [character, setCharacter] = useState('');
+    const [Data_Character, setData_Character] = useState(null);
     const params = useParams();
-    const url = "www.swapi.tech/api/people/1";
-    const idNumero = obtenerIdDeUrl(url);
-    console.log("El ID es:", idNumero);
+
+
 
     useEffect(() => {
-        fetch(`https://www.swapi.tech/api/people/${params.character_id}`)
+
+
+        fetch(`https://www.swapi.tech/api/people/${parseInt(params.character_id) + 1}`)
             .then((response) => response.json())
-            .then((data) => setData_Character(data.result.properties))
+            .then((data) => {
+
+                if (data.result && data.result.properties) {
+                    setData_Character(data.result.properties);
+                } else {
+                    console.error("Data inválida", data);
+                }
+            })
             .catch((error) => console.error("Error fetching character:", error));
-
-    }, [params.character_id])
-
-
-
-
+    }, [params.character_id]);
 
     return (
-        <div className="jumbotron">
-            <h1 className="display-4">Este es el personajds: </h1>
+        <div className="jumbotron m-3">
+            <h1 className="display-4">{Character.name}</h1>
 
             <hr className="my-4" />
-            <p>Name: {Data_Character.height}</p>
 
 
+            {Data_Character ? (
+                <>
+                    <div className="d-flex justify-content-left">
+                        <div className="d-flex m-5">
+                            <img
+                                src={`https://starwars-visualguide.com/assets/img/characters/${parseInt(params.character_id) + 1}.jpg`}
+                                alt={Data_Character.name}
+                                style={{ width: '100%', borderRadius: '10px' }}
+                            />
+
+                        </div>
+                        <div className="d-flex aling-item-start flex-column m-5">
+                            <p><span>Name:</span> <span style={{ color: 'white' }}><strong>{Data_Character.name}</strong></span></p>
+                            <p><span>Height:</span> <span style={{ color: 'white' }}><strong>{Data_Character.height}</strong></span></p>
+                            <p><span>Hair color:</span> <span style={{ color: 'white' }}><strong>{Data_Character.hair_color}</strong></span></p>
+                            <p><span>Skin color:</span> <span style={{ color: 'white' }}><strong>{Data_Character.skin_color}</strong></span></p>
+                            <p><span>Eye color: </span> <span style={{ color: 'white' }}><strong>{Data_Character.eye_color}</strong></span></p>
+                            <p><span>Date of birth:</span> <span style={{ color: 'white' }}><strong>{Data_Character.birth_year}</strong></span></p>
+                            <p><span>Gender:</span> <span style={{ color: 'white' }}><strong>{Data_Character.gender}</strong></span></p>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <Link className="d-flex justify-content-center flex-end" to="/">
+                        <span className="btn btn-dark d-flex justify-content-center" href="#" role="button">
+                            Inicio
+                        </span>
+                    </Link>
+
+
+
+                </>
+            ) : (
+                <p>Cargando datos del personaje...</p>
+            )}
 
             <Link to="/">
-                <span className="btn btn-primary btn-lg" href="#" role="button">
-                    Inicio
-                </span>
-            </Link>
 
+            </Link>
         </div>
     );
-};
-Character.propTypes = {
-    match: PropTypes.object
 };
